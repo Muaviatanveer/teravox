@@ -13,16 +13,17 @@ from scipy.ndimage import label as nd_label
 app = FastAPI(title="NASA Space Apps Challenge — TERRAVOX")
 app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
-rasters_dir = Path("outputs/rasters")
+BASE_DIR = Path(__file__).resolve().parent.parent
+rasters_dir = BASE_DIR / "outputs" / "rasters"
 rasters_dir.mkdir(parents=True, exist_ok=True)
-reports_dir = Path("outputs/reports")
+reports_dir = BASE_DIR / "outputs" / "reports"
 reports_dir.mkdir(parents=True, exist_ok=True)
-static_dir = Path("backend/static")
+static_dir = BASE_DIR / "backend" / "static"
 static_dir.mkdir(parents=True, exist_ok=True)
 manifest_path = reports_dir / "visual_manifest.json"
 terramind_cache_path = reports_dir / "terramind_anomalies.json"
 app.mount("/rasters", StaticFiles(directory=str(rasters_dir)), name="rasters")
-textures_dir = Path("outputs/textures")
+textures_dir = BASE_DIR / "outputs" / "textures"
 textures_dir.mkdir(parents=True, exist_ok=True)
 app.mount("/textures", StaticFiles(directory=str(textures_dir)), name="textures")
 app.mount("/static", StaticFiles(directory=str(static_dir)), name="static")
@@ -785,7 +786,7 @@ Answer concisely in 3 to 4 sentences in clear, plain English, grounded strictly 
         ans, used_model = f"Gemini error: {e}", req.model
     return {"answer": ans, "model": used_model}
 
-@app.get("/", response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def serve_solar_system_landing():
     return '''<!DOCTYPE html>
 <html lang="en">
@@ -1367,7 +1368,7 @@ def serve_solar_system_landing():
 </html>'''
 
 
-@app.get("/workstation", response_class=HTMLResponse)
+@app.api_route("/workstation", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def serve_terravox_intelligence_system():
     return '''<!DOCTYPE html>
 <html lang="en">
