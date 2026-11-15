@@ -805,12 +805,14 @@ Answer concisely in 3 to 4 sentences in clear, plain English, grounded strictly 
         ans, used_model = f"Gemini error: {e}", req.model
     return {"answer": ans, "model": used_model}
 
-@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"])
 def serve_solar_system_landing():
-    return '''<!DOCTYPE html>
+    headers = {"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"}
+    return HTMLResponse(content='''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nasa Space Apps challenge</title>
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
   <link rel="shortcut icon" href="/static/favicon-32x32.png">
@@ -923,6 +925,29 @@ def serve_solar_system_landing():
       background: rgba(10, 15, 24, 0.9); border: 1px solid rgba(255, 255, 255, 0.14);
       border-radius: 999px; padding: 8px 20px; font-size: 11.5px; font-weight: 600;
       color: #94A3B8; z-index: 20; pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      #hero-panel {
+        left: 12px !important;
+        right: 12px !important;
+        top: auto !important;
+        bottom: 16px !important;
+        transform: none !important;
+        width: auto !important;
+        max-width: none !important;
+        max-height: 75vh !important;
+        overflow-y: auto !important;
+        padding: 18px 18px !important;
+        border-radius: 14px !important;
+      }
+      .hero-title { font-size: 28px !important; }
+      .hero-tagline { font-size: 15px !important; }
+      .hero-desc { font-size: 12px !important; line-height: 1.45 !important; }
+      .proof-strip { grid-template-columns: 1fr 1fr !important; }
+      .engine-toggle { top: 10px !important; right: 12px !important; }
+      .engine-toggle button { font-size: 10px !important; padding: 5px 8px !important; }
+      #flight-hud { display: none !important; }
     }
   </style>
 </head>
@@ -1384,15 +1409,17 @@ def serve_solar_system_landing():
     });
   </script>
 </body>
-</html>'''
+</html>''', headers=headers)
 
 
-@app.api_route("/workstation", methods=["GET", "HEAD"], response_class=HTMLResponse)
+@app.api_route("/workstation", methods=["GET", "HEAD"])
 def serve_terravox_intelligence_system():
-    return '''<!DOCTYPE html>
+    headers = {"Cache-Control": "no-cache, no-store, must-revalidate", "Pragma": "no-cache", "Expires": "0"}
+    return HTMLResponse(content='''<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Nasa Space Apps challenge</title>
   <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,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">
   <link rel="shortcut icon" href="/static/favicon-32x32.png">
@@ -1741,6 +1768,198 @@ header,
     body.hide-bottom aside.right-hud { bottom: 18px !important; }
     body.hide-bottom #reopen-bottom { display: block; }
 
+    /* Visibility toggles for desktop vs mobile */
+    .mobile-only { display: none !important; }
+
+    /* === RESPONSIVE MOBILE EXPERIENCE (SCREENS <= 900PX) === */
+    /* Laptop/Desktop (>900px) remains completely untouched */
+    @media (max-width: 900px) {
+      .desktop-only { display: none !important; }
+      .mobile-only { display: block !important; }
+
+      /* Top Header Mobile */
+      header {
+        top: 6px !important; left: 6px !important; right: 6px !important;
+        height: 46px !important; padding: 0 10px !important;
+        border-radius: 8px !important;
+      }
+      .brand { font-size: 14px !important; letter-spacing: 0.08em !important; }
+      .nav-pills { display: none !important; }
+      #ollama-model { display: none !important; }
+      .ctrl-btn { padding: 5px 8px !important; font-size: 11px !important; }
+
+      /* Reopen pills and mission control hidden on mobile */
+      .reopen-pill { display: none !important; }
+      #mission-control { display: none !important; }
+
+      /* Fullscreen Map on Mobile */
+      #map { width: 100vw !important; height: 100vh !important; }
+
+      /* Mobile Floating Action Nav Bar */
+      #mobile-nav-bar {
+        position: fixed !important;
+        bottom: 12px !important;
+        left: 10px !important;
+        right: 10px !important;
+        height: 52px !important;
+        background: rgba(15, 23, 42, 0.94) !important;
+        border: 1px solid rgba(56, 189, 248, 0.4) !important;
+        border-radius: 999px !important;
+        backdrop-filter: blur(16px) !important;
+        -webkit-backdrop-filter: blur(16px) !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-around !important;
+        padding: 4px 8px !important;
+        z-index: 40 !important;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.65) !important;
+      }
+      .mob-nav-btn {
+        flex: 1 !important;
+        height: 42px !important;
+        background: transparent !important;
+        border: none !important;
+        color: #94A3B8 !important;
+        border-radius: 999px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 1px !important;
+        cursor: pointer !important;
+        transition: 0.15s !important;
+      }
+      .mob-nav-btn.active, .mob-nav-btn:active {
+        background: rgba(56, 189, 248, 0.16) !important;
+        color: #38BDF8 !important;
+      }
+      .mob-icon { font-size: 15px !important; line-height: 1 !important; }
+      .mob-label { font-size: 9.5px !important; font-weight: 700 !important; letter-spacing: 0.02em !important; }
+
+      /* Mobile Backdrop */
+      #mobile-backdrop {
+        position: fixed !important;
+        inset: 0 !important;
+        background: rgba(3, 7, 18, 0.72) !important;
+        backdrop-filter: blur(3px) !important;
+        -webkit-backdrop-filter: blur(3px) !important;
+        z-index: 45 !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: opacity 0.25s ease !important;
+      }
+      #mobile-backdrop.active {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+
+      /* Mobile Bottom Sheet Transformation for Left HUD, Right HUD & Bottom Dock */
+      aside.left-hud,
+      aside.right-hud,
+      footer.bottom-dock {
+        position: fixed !important;
+        top: auto !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        height: auto !important;
+        max-height: 80vh !important;
+        border-radius: 18px 18px 0 0 !important;
+        border: 1px solid rgba(56, 189, 248, 0.35) !important;
+        border-bottom: none !important;
+        background: rgba(15, 23, 42, 0.98) !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+        box-shadow: 0 -12px 40px rgba(0, 0, 0, 0.85) !important;
+        z-index: 50 !important;
+        padding: 12px 14px 26px !important;
+        overflow-y: auto !important;
+        transform: translateY(105%) !important;
+        opacity: 0 !important;
+        pointer-events: none !important;
+        transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease !important;
+      }
+
+      aside.left-hud.mobile-open,
+      aside.right-hud.mobile-open,
+      footer.bottom-dock.mobile-open {
+        transform: translateY(0) !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+
+      /* Mobile Sheet Drag Handle & Header */
+      .mob-sheet-handle-bar {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 8px !important;
+        border-bottom: 1px solid rgba(148, 163, 184, 0.15) !important;
+      }
+      .mob-drag-pill {
+        width: 38px !important;
+        height: 4px !important;
+        background: rgba(148, 163, 184, 0.4) !important;
+        border-radius: 999px !important;
+        margin-bottom: 8px !important;
+      }
+      .mob-sheet-title-row {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+      }
+      .mob-sheet-title {
+        font-size: 13px !important;
+        font-weight: 800 !important;
+        color: #38BDF8 !important;
+        letter-spacing: 0.04em !important;
+      }
+      .mob-sheet-close {
+        background: rgba(148, 163, 184, 0.16) !important;
+        color: #F8FAFC !important;
+        border: 1px solid rgba(148, 163, 184, 0.25) !important;
+        border-radius: 6px !important;
+        padding: 4px 10px !important;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        cursor: pointer !important;
+      }
+
+      /* Bottom Dock single-column stacking on mobile */
+      footer.bottom-dock {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 10px !important;
+      }
+      .dock-panel {
+        width: 100% !important;
+        border-radius: 8px !important;
+      }
+
+      /* Pre-Flight Modal mobile responsive */
+      #question-modal {
+        width: calc(100% - 24px) !important;
+        max-width: 420px !important;
+        max-height: 85vh !important;
+        overflow-y: auto !important;
+        padding: 14px !important;
+        border-radius: 12px !important;
+      }
+
+      /* Compare Slider Mobile */
+      .compare-container {
+        height: 150px !important;
+      }
+      .img-before-wrap img {
+        width: 100% !important;
+        min-width: 320px !important;
+      }
+    }
+
   </style>
 </head>
 <body class="level-workbench">
@@ -1783,11 +2002,11 @@ header,
     <div class="brand-group">
       <div class="brand-dot"></div>
       <span class="brand">TERRAVOX</span>
-      <span style="font-size:10.5px; color:#8B949E; font-family:ui-monospace,monospace;">NISAR L2 INTELLIGENCE</span>
+      <span class="desktop-only" style="font-size:10.5px; color:#8B949E; font-family:ui-monospace,monospace;">NISAR L2 INTELLIGENCE</span>
     </div>
 
     <!-- 3-Level Progressive Disclosure Switcher -->
-    <div class="nav-pills">
+    <div class="nav-pills desktop-only">
       <button class="nav-pill" id="lvl-explore" onclick="setComplexityLevel('explore')">🌍 Explore</button>
       <button class="nav-pill" id="lvl-investigate" onclick="setComplexityLevel('investigate')">🔍 Investigate</button>
       <button class="nav-pill active" id="lvl-workbench" onclick="setComplexityLevel('workbench')">🔬 Scientific Workbench</button>
@@ -1796,14 +2015,16 @@ header,
     </div>
 
     <div class="top-controls">
-      <select id="ollama-model" class="model-select">
+      <select id="ollama-model" class="model-select desktop-only">
         <option value="gemini-3.8-flash">AI: gemini-3.8-flash</option>
         <option value="gemini-2.5-flash">AI: gemini-2.5-flash</option>
       </select>
-      <button class="ctrl-btn" onclick="map.zoomIn({duration: 300})">➕</button>
-      <button class="ctrl-btn" onclick="map.zoomOut({duration: 300})">➖</button>
-      <button class="ctrl-btn" id="btn-night" onclick="toggleBlackMarble()">🌃 Night Earth</button>
-      <button class="ctrl-btn" onclick="toggleSpin()">⟳ Spin</button>
+      <button class="ctrl-btn desktop-only" onclick="map.zoomIn({duration: 300})">➕</button>
+      <button class="ctrl-btn desktop-only" onclick="map.zoomOut({duration: 300})">➖</button>
+      <button class="ctrl-btn" id="btn-night" onclick="toggleBlackMarble()">🌃<span class="desktop-only"> Night Earth</span></button>
+      <button class="ctrl-btn desktop-only" onclick="toggleSpin()">⟳ Spin</button>
+      <button class="ctrl-btn mobile-only" onclick="flyToSpaceGlobe()" title="Globe Orbit View">🛰️</button>
+      <button class="ctrl-btn mobile-only" onclick="returnToSolarSystemAnimated()" title="Solar System Entry">☀️</button>
     </div>
   </header>
 
@@ -1817,6 +2038,13 @@ header,
 
   <!-- Left Dock -->
   <aside class="left-hud">
+    <div class="mob-sheet-handle-bar mobile-only">
+      <div class="mob-drag-pill"></div>
+      <div class="mob-sheet-title-row">
+        <span class="mob-sheet-title">🗺️ Regions, Anomalies & Layers</span>
+        <button class="mob-sheet-close" onclick="closeMobileSheets()">✕ Done</button>
+      </div>
+    </div>
     <div class="sec-label"><span>0. Search Any Location</span><span>Maps</span></div>
     <div class="search-wrap">
       <div class="search-row">
@@ -1865,6 +2093,13 @@ header,
 
   <!-- Right Intelligence Dock -->
   <aside class="right-hud">
+    <div class="mob-sheet-handle-bar mobile-only">
+      <div class="mob-drag-pill"></div>
+      <div class="mob-sheet-title-row">
+        <span class="mob-sheet-title">🧠 Intelligence & Radar Inspection</span>
+        <button class="mob-sheet-close" onclick="closeMobileSheets()">✕ Done</button>
+      </div>
+    </div>
     <div class="sec-label">
       <span>4. Before vs. After Slider</span>
       <button class="ctrl-btn primary" style="padding:2px 8px; font-size:9.5px;" onclick="exportInvestigationReport()">📄 Export Report</button>
@@ -1932,6 +2167,13 @@ header,
 
   <!-- Bottom 3-Column Dock (Level 3 Scientific Workbench Only) -->
   <footer class="bottom-dock">
+    <div class="mob-sheet-handle-bar mobile-only">
+      <div class="mob-drag-pill"></div>
+      <div class="mob-sheet-title-row">
+        <span class="mob-sheet-title">⏱️ Observation Timeline & Telemetry</span>
+        <button class="mob-sheet-close" onclick="closeMobileSheets()">✕ Done</button>
+      </div>
+    </div>
     <div class="dock-panel">
       <div class="sec-label"><span>Satellite & Location Summary</span><span style="color:#4ADE80;">● VERIFIED</span></div>
       <div style="display:grid; grid-template-columns: 1fr 1fr; gap:5px; font-family:ui-monospace,monospace; font-size:10.5px;">
@@ -1974,6 +2216,24 @@ header,
     </div>
   </footer>
 
+  <!-- Mobile Backdrop & Floating Navigation Bar -->
+  <div id="mobile-backdrop" class="mobile-only" onclick="closeMobileSheets()"></div>
+
+  <nav id="mobile-nav-bar" class="mobile-only">
+    <button class="mob-nav-btn" id="mob-btn-left" onclick="openMobileSheet('left')">
+      <span class="mob-icon">🗺️</span>
+      <span class="mob-label">Regions & Layers</span>
+    </button>
+    <button class="mob-nav-btn" id="mob-btn-right" onclick="openMobileSheet('right')">
+      <span class="mob-icon">🧠</span>
+      <span class="mob-label">AI Analysis</span>
+    </button>
+    <button class="mob-nav-btn" id="mob-btn-bottom" onclick="openMobileSheet('bottom')">
+      <span class="mob-icon">⏱️</span>
+      <span class="mob-label">Timeline</span>
+    </button>
+  </nav>
+
   <script>
     let manifest = {}, activeData = null, lastSpotPayload = null, lastAiPayload = null, lastAnomalyMeta = null;
     let spinning = true, lastInteractionTime = performance.now(), clickedLngLat = null, targetMarker = null, spotVer = 1;
@@ -1987,6 +2247,7 @@ header,
       maxParallelImageRequests: 16, fadeDuration: 0, maxTileCacheSize: 900, refreshExpiredTiles: false, antialias: false,
       style: {
         version: 8,
+        glyphs: 'https://demotiles.maplibre.org/font/{fontstack}/{range}.pbf',
         projection: { type: 'globe' },
         sky: {
           'sky-color': 'rgba(0, 0, 0, 0)',
@@ -2141,6 +2402,54 @@ header,
 
     function toggleDock(side, hide) {
       document.body.classList.toggle('hide-' + side, hide);
+    }
+
+    function openMobileSheet(name) {
+      if (window.innerWidth > 900) {
+        toggleDock(name, false);
+        return;
+      }
+      const backdrop = document.getElementById('mobile-backdrop');
+      const leftHud = document.querySelector('aside.left-hud');
+      const rightHud = document.querySelector('aside.right-hud');
+      const bottomDock = document.querySelector('footer.bottom-dock');
+      const targets = { 'left': leftHud, 'right': rightHud, 'bottom': bottomDock };
+      const target = targets[name];
+      const isAlreadyOpen = target && target.classList.contains('mobile-open');
+
+      [leftHud, rightHud, bottomDock].forEach(el => { if (el) el.classList.remove('mobile-open'); });
+      ['left', 'right', 'bottom'].forEach(k => {
+        const btn = document.getElementById('mob-btn-' + k);
+        if (btn) btn.classList.remove('active');
+      });
+
+      if (!isAlreadyOpen && target) {
+        target.classList.add('mobile-open');
+        if (backdrop) backdrop.classList.add('active');
+        const activeBtn = document.getElementById('mob-btn-' + name);
+        if (activeBtn) activeBtn.classList.add('active');
+      } else {
+        if (backdrop) backdrop.classList.remove('active');
+      }
+    }
+
+    function closeMobileSheets() {
+      const leftHud = document.querySelector('aside.left-hud');
+      const rightHud = document.querySelector('aside.right-hud');
+      const bottomDock = document.querySelector('footer.bottom-dock');
+      const backdrop = document.getElementById('mobile-backdrop');
+      [leftHud, rightHud, bottomDock].forEach(el => { if (el) el.classList.remove('mobile-open'); });
+      ['left', 'right', 'bottom'].forEach(k => {
+        const btn = document.getElementById('mob-btn-' + k);
+        if (btn) btn.classList.remove('active');
+      });
+      if (backdrop) backdrop.classList.remove('active');
+    }
+
+    // Auto-open sheet if specified in URL query
+    const initialSheet = new URLSearchParams(window.location.search).get('open_sheet');
+    if (initialSheet) {
+      openMobileSheet(initialSheet);
     }
 
     function toggleSpin() {
@@ -2363,11 +2672,13 @@ header,
       const a = anomaliesList[idx];
       if (!a) return;
       clickedLngLat = [a.lon, a.lat];
+      if (window.innerWidth <= 900) closeMobileSheets();
       await runSpotAnalysis(a.mode, a);
     }
 
     map.on('click', async (e) => {
       markUserActivity();
+      if (window.innerWidth <= 900) closeMobileSheets();
       clickedLngLat = [e.lngLat.lng, e.lngLat.lat];
       if (targetMarker) targetMarker.remove();
       const el = document.createElement('div');
@@ -2401,6 +2712,7 @@ header,
       activeData = r;
       setSarImage(r.change_url, r.corners);
       setBtn('change');
+      if (window.innerWidth <= 900) closeMobileSheets();
       await runSpotAnalysis(mode);
     }
 
@@ -2686,4 +2998,4 @@ header,
     }
   </script>
 </body>
-</html>'''
+</html>''', headers=headers)
