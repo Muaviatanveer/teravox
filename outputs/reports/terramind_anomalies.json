@@ -1,0 +1,32 @@
+[
+  {
+    "id": "terramind_punjab_1",
+    "title": "Punjab Anomaly #1: Coherent Backscatter Drop",
+    "mode": "flood",
+    "lon": 70.7698,
+    "lat": 31.2927,
+    "magnitude": "Mean \u0394\u03b3\u2070 = -7.70 dB (Peak: -16.77 dB)",
+    "extent": "742.4 Hectares (Connected Cluster)",
+    "quality": "Acceptable (Multi-Look GCOV Track 12)",
+    "hypotheses": [
+      "Hypothesis A: Surface-water inundation causing specular radar reflection away from sensor.",
+      "Hypothesis B: Smooth wet soil or agricultural field flooding for rice/crop preparation."
+    ],
+    "next_evidence": "Cross-check with cloud-free Sentinel-2 NDWI optical imagery and river gauge levels."
+  },
+  {
+    "id": "terramind_punjab_2",
+    "title": "Punjab Anomaly #2: Coherent Backscatter Drop",
+    "mode": "flood",
+    "lon": 70.8001,
+    "lat": 30.7764,
+    "magnitude": "Mean \u0394\u03b3\u2070 = -7.55 dB (Peak: -17.32 dB)",
+    "extent": "494.1 Hectares (Connected Cluster)",
+    "quality": "Acceptable (Multi-Look GCOV Track 12)",
+    "hypotheses": [
+      "Hypothesis A: Surface-water inundation causing specular radar reflection away from sensor.",
+      "Hypothesis B: Smooth wet soil or agricultural field flooding for rice/crop preparation."
+    ],
+    "next_evidence": "Cross-check with cloud-free Sentinel-2 NDWI optical imagery and river gauge levels."
+  }
+]

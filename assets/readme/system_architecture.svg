@@ -1,0 +1,139 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#020408" />
+      <stop offset="100%" stop-color="#0B1425" />
+    </linearGradient>
+    <linearGradient id="blueGlow" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0B3D91" />
+      <stop offset="100%" stop-color="#38BDF8" />
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0F172A" />
+      <stop offset="100%" stop-color="#0B1322" />
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="1100" height="520" fill="url(#bgGrad)" rx="14" stroke="#1E293B" stroke-width="2"/>
+
+  <!-- Telemetry Header -->
+  <text x="35" y="42" fill="#38BDF8" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="12" font-weight="800" letter-spacing="2">TERRAVOX SCIENTIFIC PIPELINE &amp; SYSTEM ARCHITECTURE</text>
+  <text x="35" y="66" fill="#F8FAFC" font-family="'SF Pro Display', -apple-system, sans-serif" font-size="22" font-weight="900">End-to-End NISAR Level-2 Radar Ingestion to 3D Earth Intelligence</text>
+
+  <!-- Flow Arrows (Connecting paths) -->
+  <path d="M 220 180 L 260 180" stroke="#38BDF8" stroke-width="3" marker-end="url(#arrow)" filter="url(#glow)"/>
+  <path d="M 470 180 L 510 180" stroke="#38BDF8" stroke-width="3" filter="url(#glow)"/>
+  <path d="M 720 180 L 760 180" stroke="#38BDF8" stroke-width="3" filter="url(#glow)"/>
+  <path d="M 970 180 L 1010 180" stroke="#38BDF8" stroke-width="3" filter="url(#glow)"/>
+
+  <!-- Stage 1: Space Segment -->
+  <g transform="translate(35, 100)">
+    <rect width="190" height="370" fill="url(#cardGrad)" rx="10" stroke="#38BDF8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="190" height="34" fill="#0B3D91" rx="10"/>
+    <text x="95" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800" text-anchor="middle">1. SPACE SEGMENT</text>
+    <text x="95" y="70" fill="#38BDF8" font-family="sans-serif" font-size="34" text-anchor="middle">🛰️</text>
+    <text x="95" y="105" fill="#F8FAFC" font-family="sans-serif" font-size="14" font-weight="800" text-anchor="middle">NASA-ISRO NISAR</text>
+    <text x="95" y="125" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">L-Band (1.25 GHz SAR)</text>
+
+    <line x1="20" y1="145" x2="170" y2="145" stroke="#1E293B"/>
+
+    <text x="20" y="170" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• 12-Day Exact Repeat</text>
+    <text x="20" y="195" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Level-2 GCOV (RTC)</text>
+    <text x="20" y="215" fill="#94A3B8" font-family="sans-serif" font-size="10">  Normalized Backscatter</text>
+    <text x="20" y="245" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Level-2 GUNW</text>
+    <text x="20" y="265" fill="#94A3B8" font-family="sans-serif" font-size="10">  Unwrapped InSAR Phase</text>
+    <text x="20" y="295" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• 24 cm L-Band Radar</text>
+    <text x="20" y="315" fill="#94A3B8" font-family="sans-serif" font-size="10">  Cloud/Smoke Penetrating</text>
+    <text x="95" y="350" fill="#38BDF8" font-family="sans-serif" font-size="10" font-weight="800" text-anchor="middle">[747 km Sun-Synch Orbit]</text>
+  </g>
+
+  <!-- Stage 2: Ingestion & Subsetting -->
+  <g transform="translate(250, 100)">
+    <rect width="210" height="370" fill="url(#cardGrad)" rx="10" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="0" y="0" width="210" height="34" fill="#1E293B" rx="10"/>
+    <text x="105" y="22" fill="#38BDF8" font-family="sans-serif" font-size="11" font-weight="800" text-anchor="middle">2. INGESTION GATEWAY</text>
+    <text x="105" y="70" fill="#38BDF8" font-family="sans-serif" font-size="34" text-anchor="middle">⚡</text>
+    <text x="105" y="105" fill="#F8FAFC" font-family="sans-serif" font-size="14" font-weight="800" text-anchor="middle">NASA Earthdata Cloud</text>
+    <text x="105" y="125" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">ASF DAAC API + CMR</text>
+
+    <line x1="20" y1="145" x2="190" y2="145" stroke="#1E293B"/>
+
+    <text x="20" y="170" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Study Area Gate Verifier</text>
+    <text x="20" y="190" fill="#94A3B8" font-family="sans-serif" font-size="10">  Track/Frame Compatibility</text>
+    <text x="20" y="220" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• CachedRangeReader</text>
+    <text x="20" y="240" fill="#94A3B8" font-family="sans-serif" font-size="10">  HTTP Range Byte Subsetting</text>
+    <text x="20" y="270" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Stream 15–35 MB Chunks</text>
+    <text x="20" y="290" fill="#94A3B8" font-family="sans-serif" font-size="10">  Bypasses 4 GB Full Download</text>
+    <text x="20" y="320" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Filename Regex Parser</text>
+    <text x="105" y="350" fill="#22C55E" font-family="sans-serif" font-size="10" font-weight="800" text-anchor="middle">[Authentic NASA URS Session]</text>
+  </g>
+
+  <!-- Stage 3: Science Engine -->
+  <g transform="translate(485, 100)">
+    <rect width="220" height="370" fill="url(#cardGrad)" rx="10" stroke="#38BDF8" stroke-width="2"/>
+    <rect x="0" y="0" width="220" height="34" fill="#0B3D91" rx="10"/>
+    <text x="110" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="11" font-weight="800" text-anchor="middle">3. SCIENCE ENGINE &amp; UARI</text>
+    <text x="110" y="70" fill="#38BDF8" font-family="sans-serif" font-size="34" text-anchor="middle">🔬</text>
+    <text x="110" y="105" fill="#F8FAFC" font-family="sans-serif" font-size="14" font-weight="800" text-anchor="middle">Physics &amp; Uncertainty</text>
+    <text x="110" y="125" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">NumPy · SciPy · Rasterio</text>
+
+    <line x1="20" y1="145" x2="200" y2="145" stroke="#1E293B"/>
+
+    <text x="20" y="170" fill="#38BDF8" font-family="sans-serif" font-size="11" font-weight="700">• Pipeline A: GCOV</text>
+    <text x="20" y="190" fill="#94A3B8" font-family="sans-serif" font-size="10">  Δγ⁰ = 10·log₁₀(γ₂/γ₁) dB</text>
+    <text x="20" y="220" fill="#EF4444" font-family="sans-serif" font-size="11" font-weight="700">• Pipeline B: GUNW</text>
+    <text x="20" y="240" fill="#94A3B8" font-family="sans-serif" font-size="10">  d_LOS = -(λ/4π)·Δφ mm</text>
+    <text x="20" y="270" fill="#22C55E" font-family="sans-serif" font-size="11" font-weight="700">• UARI Trust Framework</text>
+    <text x="20" y="290" fill="#94A3B8" font-family="sans-serif" font-size="10">  Cramér-Rao Lower Bound</text>
+    <text x="20" y="320" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• APOF Multi-Res Fusion</text>
+    <text x="110" y="350" fill="#38BDF8" font-family="sans-serif" font-size="10" font-weight="800" text-anchor="middle">[Strict Scientific Provenance]</text>
+  </g>
+
+  <!-- Stage 4: TerraMind Intelligence -->
+  <g transform="translate(730, 100)">
+    <rect width="210" height="370" fill="url(#cardGrad)" rx="10" stroke="#1E293B" stroke-width="1.5"/>
+    <rect x="0" y="0" width="210" height="34" fill="#1E293B" rx="10"/>
+    <text x="105" y="22" fill="#38BDF8" font-family="sans-serif" font-size="11" font-weight="800" text-anchor="middle">4. TERRAMIND AI</text>
+    <text x="105" y="70" fill="#38BDF8" font-family="sans-serif" font-size="34" text-anchor="middle">🧠</text>
+    <text x="105" y="105" fill="#F8FAFC" font-family="sans-serif" font-size="14" font-weight="800" text-anchor="middle">Spatial Anomalies &amp; MECA</text>
+    <text x="105" y="125" fill="#94A3B8" font-family="sans-serif" font-size="11" text-anchor="middle">Gemini 3.8 Flash Cloud</text>
+
+    <line x1="20" y1="145" x2="190" y2="145" stroke="#1E293B"/>
+
+    <text x="20" y="170" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Connected-Components</text>
+    <text x="20" y="190" fill="#94A3B8" font-family="sans-serif" font-size="10">  Cluster Area in Hectares</text>
+    <text x="20" y="220" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Competing Hypotheses</text>
+    <text x="20" y="240" fill="#94A3B8" font-family="sans-serif" font-size="10">  Multiple Physical Causes</text>
+    <text x="20" y="270" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• 4-Part Earth Story</text>
+    <text x="20" y="290" fill="#94A3B8" font-family="sans-serif" font-size="10">  Observations to Plain Prose</text>
+    <text x="20" y="320" fill="#E2E8F0" font-family="sans-serif" font-size="11" font-weight="700">• Temporal Earth Memory</text>
+    <text x="105" y="350" fill="#EAB308" font-family="sans-serif" font-size="10" font-weight="800" text-anchor="middle">[Never Hallucinates Radar]</text>
+  </g>
+
+  <!-- Stage 5: Mission Control Interface -->
+  <g transform="translate(960, 100)">
+    <rect width="115" height="370" fill="url(#cardGrad)" rx="10" stroke="#38BDF8" stroke-width="1.5"/>
+    <rect x="0" y="0" width="115" height="34" fill="#0B3D91" rx="10"/>
+    <text x="57" y="22" fill="#FFFFFF" font-family="sans-serif" font-size="10" font-weight="800" text-anchor="middle">5. WORKSTATION</text>
+    <text x="57" y="70" fill="#38BDF8" font-family="sans-serif" font-size="28" text-anchor="middle">🖥️</text>
+    <text x="57" y="105" fill="#F8FAFC" font-family="sans-serif" font-size="11" font-weight="800" text-anchor="middle">3D Earth</text>
+    <text x="57" y="125" fill="#94A3B8" font-family="sans-serif" font-size="9" text-anchor="middle">Three.js</text>
+
+    <line x1="10" y1="145" x2="105" y2="145" stroke="#1E293B"/>
+
+    <text x="12" y="170" fill="#E2E8F0" font-family="sans-serif" font-size="9" font-weight="700">• 3D Solar</text>
+    <text x="12" y="195" fill="#E2E8F0" font-family="sans-serif" font-size="9" font-weight="700">• MapLibre</text>
+    <text x="12" y="220" fill="#E2E8F0" font-family="sans-serif" font-size="9" font-weight="700">• Microscope</text>
+    <text x="12" y="245" fill="#E2E8F0" font-family="sans-serif" font-size="9" font-weight="700">• Trust HUD</text>
+    <text x="12" y="270" fill="#E2E8F0" font-family="sans-serif" font-size="9" font-weight="700">• Split Swipe</text>
+    <text x="12" y="295" fill="#E2E8F0" font-family="sans-serif" font-size="9" font-weight="700">• PDF Export</text>
+    <text x="57" y="350" fill="#38BDF8" font-family="sans-serif" font-size="9" font-weight="800" text-anchor="middle">[60 FPS GL]</text>
+  </g>
+</svg>

@@ -1,0 +1,153 @@
+{
+  "study_area_id": "punjab_flood_plains_pk",
+  "region_name": "Punjab Flood Plains (Indus & Chenab River Basin), Pakistan",
+  "bounds_wgs84": [
+    70.55548842965209,
+    29.570635705366342,
+    71.63405985906144,
+    30.629941676199373
+  ],
+  "pre_event_date": "2026-08-14",
+  "post_event_date": "2026-08-26",
+  "summary_stats": {
+    "valid_pixel_fraction": 0.0045548503163483625,
+    "total_valid_pixels": 521699,
+    "flooded_pixel_count": 47720,
+    "flood_area_fraction": 0.09147036892921014,
+    "mean_change_db": 0.34061017632484436,
+    "median_change_db": 0.37526512145996094,
+    "p05_change_db": -5.173538684844971,
+    "p95_change_db": 5.755934715270996,
+    "mean_uncertainty_db": 2.705726385116577
+  },
+  "rasters": {
+    "delta_backscatter_db": "outputs/rasters/punjab_flood_plains_pk_delta_backscatter_db.tif",
+    "inundation_extent": "outputs/rasters/punjab_flood_plains_pk_inundation_extent.tif",
+    "uari_uncertainty_db": "outputs/rasters/punjab_flood_plains_pk_uari_uncertainty_db.tif"
+  },
+  "sample_measurements": [
+    {
+      "id": "punjab_flood_plains_pk_confirmed_flood_inundation_core",
+      "study_area_id": "punjab_flood_plains_pk",
+      "region_name": "Punjab Indus\u2013Chenab Basin, Pakistan (Confirmed Flood Inundation Core)",
+      "coordinates_wgs84": [
+        70.79412,
+        29.85394
+      ],
+      "measurement_type": "rtc_gamma0_backscatter_change_HHHH",
+      "value": -18.22,
+      "unit": "dB",
+      "uncertainty": 2.68,
+      "quality_status": "moderate",
+      "coherence_or_looks": 16.0,
+      "apof_disagreement_mm": null,
+      "sign_convention": "Negative (-dB) indicates decreased radar backscatter (consistent with water specular reflection or drying); Positive (+dB) indicates increased radar backscatter (roughness or moisture).",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GCOV_028_012_A_017_4005_DHDH_A_20260814T002948_20260814T003023_P05023_N_F_J_001",
+          "product_type": "GCOV",
+          "acquisition_start": "2026-08-14T00:29:48.000000000",
+          "acquisition_end": "2026-08-14T00:30:23.999342105",
+          "track_number": 12,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "flood_classification": "INUNDATED_WATER",
+        "pixel_row_col": "(8349, 1985)",
+        "native_crs": "EPSG:32643"
+      },
+      "limitations": [
+        "Radar backscatter change (dB) detects surface roughness and dielectric property changes; it is NOT ground elevation change.",
+        "Smooth water bodies reflect radar pulses away specularly; wind-roughened open water or flooded vegetation can produce complex backscatter variations.",
+        "Radar shadow and layover zones are masked and never interpolated."
+      ]
+    },
+    {
+      "id": "punjab_flood_plains_pk_flood_plain_inundation_edge",
+      "study_area_id": "punjab_flood_plains_pk",
+      "region_name": "Punjab Indus\u2013Chenab Basin, Pakistan (Flood Plain Inundation Edge)",
+      "coordinates_wgs84": [
+        70.78298,
+        29.88035
+      ],
+      "measurement_type": "rtc_gamma0_backscatter_change_HHHH",
+      "value": -3.54,
+      "unit": "dB",
+      "uncertainty": 2.68,
+      "quality_status": "moderate",
+      "coherence_or_looks": 16.0,
+      "apof_disagreement_mm": null,
+      "sign_convention": "Negative (-dB) indicates decreased radar backscatter (consistent with water specular reflection or drying); Positive (+dB) indicates increased radar backscatter (roughness or moisture).",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GCOV_028_012_A_017_4005_DHDH_A_20260814T002948_20260814T003023_P05023_N_F_J_001",
+          "product_type": "GCOV",
+          "acquisition_start": "2026-08-14T00:29:48.000000000",
+          "acquisition_end": "2026-08-14T00:30:23.999342105",
+          "track_number": 12,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "flood_classification": "INUNDATED_WATER",
+        "pixel_row_col": "(8052, 1888)",
+        "native_crs": "EPSG:32643"
+      },
+      "limitations": [
+        "Radar backscatter change (dB) detects surface roughness and dielectric property changes; it is NOT ground elevation change.",
+        "Smooth water bodies reflect radar pulses away specularly; wind-roughened open water or flooded vegetation can produce complex backscatter variations.",
+        "Radar shadow and layover zones are masked and never interpolated."
+      ]
+    },
+    {
+      "id": "punjab_flood_plains_pk_dry_agricultural_control",
+      "study_area_id": "punjab_flood_plains_pk",
+      "region_name": "Punjab Indus\u2013Chenab Basin, Pakistan (Dry Agricultural Control)",
+      "coordinates_wgs84": [
+        70.74508,
+        29.98602
+      ],
+      "measurement_type": "rtc_gamma0_backscatter_change_HHHH",
+      "value": -0.69,
+      "unit": "dB",
+      "uncertainty": 2.7,
+      "quality_status": "moderate",
+      "coherence_or_looks": 16.0,
+      "apof_disagreement_mm": null,
+      "sign_convention": "Negative (-dB) indicates decreased radar backscatter (consistent with water specular reflection or drying); Positive (+dB) indicates increased radar backscatter (roughness or moisture).",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GCOV_028_012_A_017_4005_DHDH_A_20260814T002948_20260814T003023_P05023_N_F_J_001",
+          "product_type": "GCOV",
+          "acquisition_start": "2026-08-14T00:29:48.000000000",
+          "acquisition_end": "2026-08-14T00:30:23.999342105",
+          "track_number": 12,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "flood_classification": "NON_INUNDATED_LAND",
+        "pixel_row_col": "(6866, 1565)",
+        "native_crs": "EPSG:32643"
+      },
+      "limitations": [
+        "Radar backscatter change (dB) detects surface roughness and dielectric property changes; it is NOT ground elevation change.",
+        "Smooth water bodies reflect radar pulses away specularly; wind-roughened open water or flooded vegetation can produce complex backscatter variations.",
+        "Radar shadow and layover zones are masked and never interpolated."
+      ]
+    }
+  ]
+}

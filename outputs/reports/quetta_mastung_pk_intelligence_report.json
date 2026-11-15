@@ -1,0 +1,248 @@
+{
+  "study_area_id": "quetta_mastung_pk",
+  "bounds_wgs84": [
+    66.42944268325779,
+    29.63591669232453,
+    67.36306730574235,
+    30.464367625585187
+  ],
+  "provenance": {
+    "granule_id": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001",
+    "product_type": "GUNW",
+    "radar_band": "L",
+    "reference_start_time": "2026-06-17T00:46:30.000000000",
+    "reference_end_time": "2026-06-17T00:47:05.999342105",
+    "secondary_start_time": "2026-06-29T00:46:30.000000000",
+    "secondary_end_time": "2026-06-29T00:47:04.999342105",
+    "track_number": 41,
+    "frame_number": 17,
+    "look_direction": "Left",
+    "orbit_pass_direction": "Ascending",
+    "product_version": "1.0.11",
+    "composite_release_id": "P05023",
+    "center_frequency_hz": 1239000000.0,
+    "wavelength_m": 0.2419632429378531,
+    "epsg_code": 32642
+  },
+  "summary_stats": {
+    "valid_pixel_fraction": 0.8805164518521247,
+    "mean_los_displacement_mm": -322.46490478515625,
+    "median_los_displacement_mm": -309.96466064453125,
+    "p05_los_displacement_mm": -419.9828186035156,
+    "p95_los_displacement_mm": -282.0928955078125,
+    "mean_uncertainty_mm": 24.682453155517578,
+    "mean_coherence": 0.6822643280029297
+  },
+  "rasters": {
+    "los_displacement_mm": "outputs/rasters/quetta_mastung_pk_los_displacement_mm.tif",
+    "uari_uncertainty_mm": "outputs/rasters/quetta_mastung_pk_uari_uncertainty_mm.tif",
+    "quality_category": "outputs/rasters/quetta_mastung_pk_quality_category.tif"
+  },
+  "sample_measurements": [
+    {
+      "id": "quetta_mastung_pk_peak_negative_los",
+      "study_area_id": "quetta_mastung_pk",
+      "region_name": "Quetta\u2013Mastung Valley, Balochistan (Peak Negative Los)",
+      "coordinates_wgs84": [
+        66.60916,
+        29.87198
+      ],
+      "measurement_type": "los_displacement_apof_fused",
+      "value": -666.521,
+      "unit": "mm",
+      "uncertainty": 29.508,
+      "quality_status": "high",
+      "coherence_or_looks": 0.666,
+      "apof_disagreement_mm": 323.936,
+      "sign_convention": "Line-of-Sight (LOS) displacement relative to radar sensor; requires single-geometry interpretation and is not 3D or purely vertical movement.",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001",
+          "product_type": "GUNW",
+          "acquisition_start": "2026-06-17T00:46:30.000000000",
+          "acquisition_end": "2026-06-29T00:46:30.000000000",
+          "track_number": 41,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "pixel_row_col": "(805, 199)",
+        "native_crs": "EPSG:32642",
+        "wavelength_m": "0.24196 m"
+      },
+      "limitations": [
+        "Single-geometry Line-of-Sight (LOS) displacement cannot separate vertical subsidence from horizontal fault motion without ascending + descending tracks.",
+        "Unwrapped phase is relative to connected-component reference regions; phase jumps across disconnected components (connectedComponents IDs) may exist.",
+        "Tropospheric delay variations may contribute residual phase signals if not independently corrected."
+      ]
+    },
+    {
+      "id": "quetta_mastung_pk_peak_positive_los",
+      "study_area_id": "quetta_mastung_pk",
+      "region_name": "Quetta\u2013Mastung Valley, Balochistan (Peak Positive Los)",
+      "coordinates_wgs84": [
+        66.43381,
+        30.34638
+      ],
+      "measurement_type": "los_displacement_apof_fused",
+      "value": -0.0,
+      "unit": "mm",
+      "uncertainty": 1.728,
+      "quality_status": "high",
+      "coherence_or_looks": 0.796,
+      "apof_disagreement_mm": null,
+      "sign_convention": "Line-of-Sight (LOS) displacement relative to radar sensor; requires single-geometry interpretation and is not 3D or purely vertical movement.",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001",
+          "product_type": "GUNW",
+          "acquisition_start": "2026-06-17T00:46:30.000000000",
+          "acquisition_end": "2026-06-29T00:46:30.000000000",
+          "track_number": 41,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "pixel_row_col": "(143, 2)",
+        "native_crs": "EPSG:32642",
+        "wavelength_m": "0.24196 m"
+      },
+      "limitations": [
+        "Single-geometry Line-of-Sight (LOS) displacement cannot separate vertical subsidence from horizontal fault motion without ascending + descending tracks.",
+        "Unwrapped phase is relative to connected-component reference regions; phase jumps across disconnected components (connectedComponents IDs) may exist.",
+        "Tropospheric delay variations may contribute residual phase signals if not independently corrected."
+      ]
+    },
+    {
+      "id": "quetta_mastung_pk_median_reference_los",
+      "study_area_id": "quetta_mastung_pk",
+      "region_name": "Quetta\u2013Mastung Valley, Balochistan (Median Reference Los)",
+      "coordinates_wgs84": [
+        66.6779,
+        29.97857
+      ],
+      "measurement_type": "los_displacement_apof_fused",
+      "value": -309.712,
+      "unit": "mm",
+      "uncertainty": 11.001,
+      "quality_status": "high",
+      "coherence_or_looks": 0.916,
+      "apof_disagreement_mm": 599.546,
+      "sign_convention": "Line-of-Sight (LOS) displacement relative to radar sensor; requires single-geometry interpretation and is not 3D or purely vertical movement.",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001",
+          "product_type": "GUNW",
+          "acquisition_start": "2026-06-17T00:46:30.000000000",
+          "acquisition_end": "2026-06-29T00:46:30.000000000",
+          "track_number": 41,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "pixel_row_col": "(659, 285)",
+        "native_crs": "EPSG:32642",
+        "wavelength_m": "0.24196 m"
+      },
+      "limitations": [
+        "Single-geometry Line-of-Sight (LOS) displacement cannot separate vertical subsidence from horizontal fault motion without ascending + descending tracks.",
+        "Unwrapped phase is relative to connected-component reference regions; phase jumps across disconnected components (connectedComponents IDs) may exist.",
+        "Tropospheric delay variations may contribute residual phase signals if not independently corrected."
+      ]
+    },
+    {
+      "id": "quetta_mastung_pk_moderate_quality_sample",
+      "study_area_id": "quetta_mastung_pk",
+      "region_name": "Quetta\u2013Mastung Valley, Balochistan (Moderate Quality Sample)",
+      "coordinates_wgs84": [
+        67.19058,
+        30.09633
+      ],
+      "measurement_type": "los_displacement_apof_fused",
+      "value": -292.968,
+      "unit": "mm",
+      "uncertainty": 40.374,
+      "quality_status": "moderate",
+      "coherence_or_looks": 0.417,
+      "apof_disagreement_mm": 499.437,
+      "sign_convention": "Line-of-Sight (LOS) displacement relative to radar sensor; requires single-geometry interpretation and is not 3D or purely vertical movement.",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001",
+          "product_type": "GUNW",
+          "acquisition_start": "2026-06-17T00:46:30.000000000",
+          "acquisition_end": "2026-06-29T00:46:30.000000000",
+          "track_number": 41,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "pixel_row_col": "(507, 906)",
+        "native_crs": "EPSG:32642",
+        "wavelength_m": "0.24196 m"
+      },
+      "limitations": [
+        "Single-geometry Line-of-Sight (LOS) displacement cannot separate vertical subsidence from horizontal fault motion without ascending + descending tracks.",
+        "Unwrapped phase is relative to connected-component reference regions; phase jumps across disconnected components (connectedComponents IDs) may exist.",
+        "Tropospheric delay variations may contribute residual phase signals if not independently corrected."
+      ]
+    },
+    {
+      "id": "quetta_mastung_pk_low_coherence_warning_sample",
+      "study_area_id": "quetta_mastung_pk",
+      "region_name": "Quetta\u2013Mastung Valley, Balochistan (Low Coherence Warning Sample)",
+      "coordinates_wgs84": [
+        67.06543,
+        29.95885
+      ],
+      "measurement_type": "los_displacement_apof_fused",
+      "value": -277.486,
+      "unit": "mm",
+      "uncertainty": 107.827,
+      "quality_status": "low",
+      "coherence_or_looks": 0.216,
+      "apof_disagreement_mm": 553.132,
+      "sign_convention": "Line-of-Sight (LOS) displacement relative to radar sensor; requires single-geometry interpretation and is not 3D or purely vertical movement.",
+      "source_observations": [
+        {
+          "granule_id": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001",
+          "product_type": "GUNW",
+          "acquisition_start": "2026-06-17T00:46:30.000000000",
+          "acquisition_end": "2026-06-29T00:46:30.000000000",
+          "track_number": 41,
+          "frame_number": 17,
+          "look_direction": "Left",
+          "orbit_pass_direction": "Ascending",
+          "composite_release_id": "P05023",
+          "maturity": "PROVISIONAL"
+        }
+      ],
+      "supporting_context": {
+        "pixel_row_col": "(695, 752)",
+        "native_crs": "EPSG:32642",
+        "wavelength_m": "0.24196 m"
+      },
+      "limitations": [
+        "Single-geometry Line-of-Sight (LOS) displacement cannot separate vertical subsidence from horizontal fault motion without ascending + descending tracks.",
+        "Unwrapped phase is relative to connected-component reference regions; phase jumps across disconnected components (connectedComponents IDs) may exist.",
+        "Tropospheric delay variations may contribute residual phase signals if not independently corrected."
+      ]
+    }
+  ]
+}

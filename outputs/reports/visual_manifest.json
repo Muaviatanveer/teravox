@@ -1,0 +1,94 @@
+{
+  "regions": {
+    "punjab_flood_plains_pk": {
+      "id": "punjab_flood_plains_pk",
+      "title": "Punjab Indus\u2013Chenab Basin",
+      "subtitle": "Monsoon Flood Inundation (NISAR L2 GCOV)",
+      "center": [
+        72.7271,
+        31.9429
+      ],
+      "zoom": 9.6,
+      "pitch": 58,
+      "bearing": -16,
+      "corners": [
+        [
+          72.62998,
+          32.02223
+        ],
+        [
+          72.82024,
+          32.02564
+        ],
+        [
+          72.82406,
+          31.86355
+        ],
+        [
+          72.63414,
+          31.86015
+        ]
+      ],
+      "before_url": "/rasters/punjab_before_sar.png",
+      "after_url": "/rasters/punjab_after_sar.png",
+      "change_url": "/rasters/punjab_flood_overlay.png",
+      "before_label": "BEFORE SAR: Aug 14, 2026 (HH Backscatter)",
+      "after_label": "AFTER SAR: Aug 26, 2026 (Monsoon Surge)",
+      "change_label": "DETECTED FLOOD INUNDATION (Cyan = Floodwater)",
+      "granule_before": "NISAR_L2_PR_GCOV_028_012_A_017_4005_DHDH_A_20260814T002948_20260814T003023_P05023_N_F_J_001.h5",
+      "granule_after": "NISAR_L2_PR_GCOV_029_012_A_017_4005_DHDH_A_20260826T002948_20260826T003023_P05023_N_F_J_001.h5",
+      "stats": {
+        "headline_metric": "17,669.1 Hectares Submerged",
+        "sub_metric": "441,728 Flooded Radar Cells Confirmed",
+        "physics_metric": "\u0394\u03b3\u2070 = -5.2 dB to -18.2 dB Specular Drop",
+        "uncertainty": "\u00b1 2.68 dB (UARI 1\u03c3 Error)",
+        "confidence": "HIGH (Cloud-Penetrating L-Band SAR)"
+      }
+    },
+    "quetta_mastung_pk": {
+      "id": "quetta_mastung_pk",
+      "title": "Quetta\u2013Mastung Valley",
+      "subtitle": "InSAR Ground Subsidence (NISAR L2 GUNW)",
+      "center": [
+        67.5738,
+        31.0543
+      ],
+      "zoom": 9.7,
+      "pitch": 60,
+      "bearing": 20,
+      "corners": [
+        [
+          66.97683,
+          31.55241
+        ],
+        [
+          68.15574,
+          31.56563
+        ],
+        [
+          68.16461,
+          30.55587
+        ],
+        [
+          66.99807,
+          30.54316
+        ]
+      ],
+      "before_url": "/rasters/quetta_before_sar.png",
+      "after_url": "/rasters/quetta_after_sar.png",
+      "change_url": "/rasters/quetta_deformation_overlay.png",
+      "before_label": "SAR COHERENCE IMAGE (Radar Stability \u03b3)",
+      "after_label": "WRAPPED INTERFEROGRAM FRINGES (Phase \u0394\u03c6)",
+      "change_label": "UNWRAPPED SUBSIDENCE BOWL (Red = Sinking Ground)",
+      "granule_before": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001.h5",
+      "granule_after": "NISAR_L2_PR_GUNW_023_041_A_017_024_4000_SH_20260617T004630_20260617T004705_20260629T004630_20260629T004704_P05023_N_F_J_001.h5",
+      "stats": {
+        "headline_metric": "-32.2 cm Ground Subsidence",
+        "sub_metric": "88.1% Coherent Radar Coverage (\u03b3 = 0.68)",
+        "physics_metric": "d_LOS = -(\u03bb / 4\u03c0) \u0394\u03c6 = -322.5 mm",
+        "uncertainty": "\u00b1 24.7 mm (UARI Cram\u00e9r-Rao Bound)",
+        "confidence": "HIGH (Connected Component Verified)"
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+# Secrets & Environment Variables
+.env
+.env.*
+*.env
+
+# Large Scientific Data Granules (Do NOT commit multi-gigabyte HDF5 files)
+*.h5
+*.he5
+*.nc
+*.downloading
+data/samples/
+
+# Python Virtual Environments & Bytecode
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Operating System & IDE Artifacts
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
