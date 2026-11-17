@@ -1855,6 +1855,9 @@ header,
       }
 
       /* Mobile Bottom Sheet Transformation for Left HUD, Right HUD & Bottom Dock */
+      body aside.left-hud,
+      body aside.right-hud,
+      body footer.bottom-dock,
       aside.left-hud,
       aside.right-hud,
       footer.bottom-dock {
@@ -1863,10 +1866,10 @@ header,
         left: 0 !important;
         right: 0 !important;
         bottom: 0 !important;
-        width: 100% !important;
-        max-width: 100% !important;
+        width: 100vw !important;
+        max-width: 100vw !important;
         height: auto !important;
-        max-height: 80vh !important;
+        max-height: 82vh !important;
         border-radius: 18px 18px 0 0 !important;
         border: 1px solid rgba(56, 189, 248, 0.35) !important;
         border-bottom: none !important;
@@ -1883,6 +1886,9 @@ header,
         transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.22s ease !important;
       }
 
+      body aside.left-hud.mobile-open,
+      body aside.right-hud.mobile-open,
+      body footer.bottom-dock.mobile-open,
       aside.left-hud.mobile-open,
       aside.right-hud.mobile-open,
       footer.bottom-dock.mobile-open {
@@ -2060,9 +2066,13 @@ header,
     <div class="tour-header-row">
       <span class="tour-step-badge" id="tour-step-badge">STEP 1 OF 10 · MISSION OVERVIEW</span>
       <div style="display:flex; align-items:center; gap:8px;">
-        <button class="tour-btn auto-play" id="tour-btn-autoplay" onclick="toggleTourAutoPlay()">▶ Auto-Play (6s)</button>
+        <button class="tour-btn auto-play active" id="tour-btn-autoplay" onclick="toggleTourAutoPlay()" title="Pause / Resume Automatic Tour">⏸ Auto (6s)</button>
         <button class="tour-close-btn" onclick="exitJudgeTour()" title="Exit Tour">✕</button>
       </div>
+    </div>
+    <!-- Animated Countdown Progress Bar -->
+    <div id="tour-progress-track" style="width: 100%; height: 3.5px; background: rgba(56, 189, 248, 0.2); border-radius: 999px; overflow: hidden; margin: 1px 0 3px;">
+      <div id="tour-progress-fill" style="width: 0%; height: 100%; background: linear-gradient(90deg, #38BDF8, #00E1FF); box-shadow: 0 0 10px #38BDF8; transition: width 0.08s linear;"></div>
     </div>
     <div class="tour-title" id="tour-step-title">Welcome to TERRAVOX</div>
     <div class="tour-desc" id="tour-step-desc">Loading system...</div>
@@ -2718,23 +2728,27 @@ header,
           ]
         }
       });
-      map.addLayer({
-        id: 'eo-sat-labels',
-        type: 'symbol',
-        source: 'eo-sats',
-        maxzoom: 4.5,
-        layout: {
-          'text-field': ['get', 'name'],
-          'text-size': 11,
-          'text-offset': [0, -1.0]
-        },
-        paint: {
-          'text-color': '#E2E8F0',
-          'text-halo-color': '#020617',
-          'text-halo-width': 1.2,
-          'text-opacity': ['interpolate', ['linear'], ['zoom'], 1, 0.9, 4.2, 0.0]
-        }
-      });
+      try {
+        map.addLayer({
+          id: 'eo-sat-labels',
+          type: 'symbol',
+          source: 'eo-sats',
+          maxzoom: 4.5,
+          layout: {
+            'text-field': ['get', 'name'],
+            'text-size': 11,
+            'text-offset': [0, -1.0]
+          },
+          paint: {
+            'text-color': '#E2E8F0',
+            'text-halo-color': '#020617',
+            'text-halo-width': 1.2,
+            'text-opacity': ['interpolate', ['linear'], ['zoom'], 1, 0.9, 4.2, 0.0]
+          }
+        });
+      } catch (err) {
+        console.warn('Satellite labels layer skipped:', err);
+      }
 
       // Animate NISAR spacecraft dot gliding along its Track 012 polar orbit
       let satLat = 15;
@@ -3112,11 +3126,13 @@ header,
       if (map.getLayer('sar-lyr')) map.setPaintProperty('sar-lyr', 'raster-opacity', parseFloat(v));
     }
 
-    /* === JUDGES' GUIDED TOUR ENGINE === */
+    /* === JUDGES' GUIDED TOUR ENGINE (100% AUTOMATED) === */
     let tourActive = false;
     let tourCurStep = 0;
-    let tourAutoTimer = null;
-    let tourAutoPlay = false;
+    let tourAutoPlay = true;
+    let tourStepStartTime = 0;
+    let tourStepDurationMs = 6500;
+    let tourTickInterval = null;
 
     const tourSteps = [
       {
@@ -3223,9 +3239,11 @@ header,
     function startJudgeTour(startStep = 0) {
       tourActive = true;
       tourCurStep = startStep;
+      tourAutoPlay = true; // AUTOMATIC BY DEFAULT
       document.getElementById('tour-backdrop').classList.add('active');
       document.getElementById('judge-tour-modal').style.display = 'flex';
       renderTourStep(tourCurStep);
+      startTourTimer();
     }
 
     function renderTourStep(idx) {
@@ -3241,6 +3259,10 @@ header,
       document.getElementById('tour-step-title').innerText = step.title;
       document.getElementById('tour-step-desc').innerText = step.desc;
       document.getElementById('tour-step-cue').innerText = step.actionCue;
+
+      // Reset progress bar
+      const bar = document.getElementById('tour-progress-fill');
+      if (bar) bar.style.width = '0%';
 
       // Update buttons
       document.getElementById('tour-btn-prev').style.display = idx === 0 ? 'none' : 'block';
@@ -3274,6 +3296,64 @@ header,
       }
     }
 
+    function startTourTimer() {
+      if (tourTickInterval) clearInterval(tourTickInterval);
+      if (!tourAutoPlay || !tourActive) return;
+
+      tourStepStartTime = performance.now();
+      // Step 2 has dual-epoch swipe slider animation, allow 8s; final step 7.5s; others 6.5s
+      tourStepDurationMs = tourCurStep === 2 ? 8000 : (tourCurStep === tourSteps.length - 1 ? 7500 : 6500);
+
+      updateAutoPlayButtonUI();
+
+      tourTickInterval = setInterval(() => {
+        if (!tourActive || !tourAutoPlay) {
+          clearInterval(tourTickInterval);
+          return;
+        }
+        const elapsed = performance.now() - tourStepStartTime;
+        const progress = Math.min(1.0, elapsed / tourStepDurationMs);
+        const remainingSec = Math.max(0, Math.ceil((tourStepDurationMs - elapsed) / 1000));
+
+        const bar = document.getElementById('tour-progress-fill');
+        if (bar) bar.style.width = (progress * 100).toFixed(1) + '%';
+
+        const apBtn = document.getElementById('tour-btn-autoplay');
+        if (apBtn) apBtn.innerText = `⏸ Auto (${remainingSec}s)`;
+
+        if (progress >= 1.0) {
+          clearInterval(tourTickInterval);
+          if (tourCurStep < tourSteps.length - 1) {
+            nextTourStep();
+          } else {
+            toggleTourAutoPlay();
+          }
+        }
+      }, 50);
+    }
+
+    function updateAutoPlayButtonUI() {
+      const apBtn = document.getElementById('tour-btn-autoplay');
+      if (!apBtn) return;
+      if (tourAutoPlay) {
+        apBtn.classList.add('active');
+        apBtn.innerText = '⏸ Auto (6s)';
+      } else {
+        apBtn.classList.remove('active');
+        apBtn.innerText = '▶ Resume Auto';
+      }
+    }
+
+    function toggleTourAutoPlay() {
+      tourAutoPlay = !tourAutoPlay;
+      updateAutoPlayButtonUI();
+      if (tourAutoPlay) {
+        startTourTimer();
+      } else {
+        if (tourTickInterval) clearInterval(tourTickInterval);
+      }
+    }
+
     function nextTourStep() {
       if (tourCurStep < tourSteps.length - 1) {
         goToTourStep(tourCurStep + 1);
@@ -3289,43 +3369,26 @@ header,
     }
 
     function goToTourStep(idx) {
-      if (tourAutoPlay) resetTourAutoTimer();
       renderTourStep(idx);
-    }
-
-    function toggleTourAutoPlay() {
-      tourAutoPlay = !tourAutoPlay;
-      const btn = document.getElementById('tour-btn-autoplay');
-      btn.classList.toggle('active', tourAutoPlay);
-      btn.innerText = tourAutoPlay ? '⏸ Pause Auto' : '▶ Auto-Play (6s)';
       if (tourAutoPlay) {
-        resetTourAutoTimer();
+        startTourTimer();
       } else {
-        if (tourAutoTimer) clearInterval(tourAutoTimer);
+        const bar = document.getElementById('tour-progress-fill');
+        if (bar) bar.style.width = '0%';
       }
-    }
-
-    function resetTourAutoTimer() {
-      if (tourAutoTimer) clearInterval(tourAutoTimer);
-      tourAutoTimer = setInterval(() => {
-        if (!tourActive) { clearInterval(tourAutoTimer); return; }
-        if (tourCurStep < tourSteps.length - 1) {
-          nextTourStep();
-        } else {
-          toggleTourAutoPlay();
-        }
-      }, 6500);
     }
 
     function exitJudgeTour() {
       tourActive = false;
-      if (tourAutoTimer) { clearInterval(tourAutoTimer); tourAutoTimer = null; }
       tourAutoPlay = false;
+      if (tourTickInterval) { clearInterval(tourTickInterval); tourTickInterval = null; }
       document.querySelectorAll('.tour-pulse-target').forEach(el => el.classList.remove('tour-pulse-target'));
       document.getElementById('tour-backdrop').classList.remove('active');
       document.getElementById('judge-tour-modal').style.display = 'none';
+      const bar = document.getElementById('tour-progress-fill');
+      if (bar) bar.style.width = '0%';
       const apBtn = document.getElementById('tour-btn-autoplay');
-      if (apBtn) { apBtn.classList.remove('active'); apBtn.innerText = '▶ Auto-Play (6s)'; }
+      if (apBtn) { apBtn.classList.remove('active'); apBtn.innerText = '▶ Auto-Play'; }
     }
 
     function animateSliderSweep() {
